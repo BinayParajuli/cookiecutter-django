@@ -3,10 +3,10 @@
 # DJANGO_READ_DOT_ENV_FILE=True
 DJANGO_SETTINGS_MODULE=config.settings.production
 DJANGO_SECRET_KEY=!!!SET DJANGO_SECRET_KEY!!!
-DJANGO_ADMIN_URL=!!!SET DJANGO_ADMIN_URL!!!
-DJANGO_ALLOWED_HOSTS=.{{ cookiecutter.domain_name }},localhost:{{cookiecutter.open_port}},{{cookiecutter.server_address}}:{{cookiecutter.open_port}}
-CSRF_TRUSTED_ORIGINS={{ cookiecutter.domain_name }},localhost,{{ cookiecutter.fe_url }}
-CORS_ALLOWED_ORIGINS={{ cookiecutter.domain_name }},localhost,{{ cookiecutter.fe_url }}
+DJANGO_ADMIN_URL=super-admin
+DJANGO_ALLOWED_HOSTS=.{{ cookiecutter.domain_name }},localhost,{{cookiecutter.server_address}}
+CSRF_TRUSTED_ORIGINS=https://{{ cookiecutter.domain_name }},https://{{ cookiecutter.fe_url }},http://{{cookiecutter.server_address}}:{{cookiecutter.open_port}},http://localhost
+CORS_ALLOWED_ORIGINS=https://{{ cookiecutter.domain_name }},https://{{ cookiecutter.fe_url }},http://{{cookiecutter.server_address}}:{{cookiecutter.open_port}},http://localhost
 
 # Security
 # ------------------------------------------------------------------------------
@@ -79,5 +79,5 @@ CELERY_FLOWER_PASSWORD=!!!SET CELERY_FLOWER_PASSWORD!!!
 {% endif %}
 
 # Superuser
-USERNAME={{cookiecutter.superuser}}
-PASSWORD={{cookiecutter.superpassword}}
+USERNAME=d2
+PASSWORD=dtwo@123
