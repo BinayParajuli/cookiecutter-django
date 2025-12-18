@@ -49,8 +49,10 @@ drf-spectacular==0.28.0  # https://github.com/tfranzel/drf-spectacular
 {%- if cookiecutter.frontend_pipeline == 'Webpack' %}
 django-webpack-loader==3.2.1  # https://github.com/django-webpack/django-webpack-loader
 {%- endif %}
-
-psycopg2-binary==2.9.10
-django-extensions==3.2.3
-django-debug-toolbar==5.2.0
 django-jazzmin==3.0.1
+psycopg2-binary==2.9.10
+django-debug-toolbar==6.0.0  # https://github.com/jazzband/django-debug-toolbar
+django-extensions==4.1  # https://github.com/django-extensions/django-extensions
+django-json-widget==2.1.0
+django-better-admin-arrayfield==1.4.2
+django-filter==25.2
