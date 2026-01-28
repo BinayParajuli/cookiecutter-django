@@ -5,6 +5,10 @@ from rest_framework.mixins import RetrieveModelMixin
 from rest_framework.mixins import UpdateModelMixin
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
+from rest_framework.permissions import AllowAny
+from rest_framework.authtoken.models import Token
+from rest_framework.generics import CreateAPIView
+from rest_framework.authtoken.views import ObtainAuthToken
 
 from {{ cookiecutter.project_slug }}.users.models import User
 
@@ -28,3 +32,23 @@ class UserViewSet(RetrieveModelMixin, ListModelMixin, UpdateModelMixin, GenericV
     def me(self, request):
         serializer = UserSerializer(request.user, context={"request": request})
         return Response(status=status.HTTP_200_OK, data=serializer.data)
+
+
+class UserRegisterationView(CreateAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]
+        
+        
+class UserLoginTokenView(ObtainAuthToken):
+    permission_classes = [AllowAny]
+    
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        user = Token.objects.get(key=response.data["token"]).user
+        response.data["user"] = {
+            "id": user.id,
+            "email": user.email,
+            "username": user.username,
+            "is_staff": user.is_staff,
+        }
+        return response
